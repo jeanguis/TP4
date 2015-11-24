@@ -79,7 +79,7 @@ class _IteradorListaEnlazada(object):
 	def __init__(self, prim):
 		self.actual = prim
 	
-	def prox(self):
+	def next(self):
 		if self.actual == None:
 			raise StopIteration("No hay mas elementos en la lista")
 		dato = self.actual.dato
@@ -119,43 +119,42 @@ class Cola:
 
 class ListaDoble(object):
  
- 	def __init__(self):
-		self.head = None
-		self.tail = None
+    head = None
+    tail = None
  
-	def append(self, dato):
-		new_node = Nodo(dato, None, None)
-		if self.head is None:
-			self.head = self.tail = new_node
-		else:
-			new_node.prev = self.tail
-			new_node.prox = None
-			self.tail.prox = new_node
-			self.tail = new_node
+    def append(self, data):
+        new_node = Nodo(data, None, None)
+        if self.head is None:
+            self.head = self.tail = new_node
+        else:
+            new_node.prev = self.tail
+            new_node.next = None
+            self.tail.next = new_node
+            self.tail = new_node
  
-	def remove(self, node_value):
-		current_node = self.head
+    def remove(self, node_value):
+        current_node = self.head
  
-		while current_node is not None:
-			if current_node.dato == node_value:
+        while current_node is not None:
+            if current_node.data == node_value:
                 # if it's not the first element
-				if current_node.prev is not None:
-					current_node.prev.prox = current_node.prox
-					current_node.prox.prev = current_node.prev
-				else:
-					# otherwise we have no prev (it's None), head is the prox one, and prev becomes None
-					self.head = current_node.prox
-					current_node.prox.prev = None
+                if current_node.prev is not None:
+                    current_node.prev.next = current_node.next
+                    current_node.next.prev = current_node.prev
+                else:
+                    # otherwise we have no prev (it's None), head is the next one, and prev becomes None
+                    self.head = current_node.next
+                    current_node.next.prev = None
  
-			current_node = current_node.prox
+            current_node = current_node.next
  
-	def show(self):
-		print "Show list dato:"
-		current_node = self.head
-		while current_node is not None:
-			#print current_node.prev.dato if hasattr(current_node.prev, "dato") else None,
-			print current_node.dato,
-			#print current_node.prox.dato if hasattr(current_node.prox, "dato") else None
+    def show(self):
+        print "Show list data:"
+        current_node = self.head
+        while current_node is not None:
+            print current_node.prev.data if hasattr(current_node.prev, "data") else None,
+            print current_node.data,
+            print current_node.next.data if hasattr(current_node.next, "data") else None
  
-			current_node = current_node.prox
-		print ""
+            current_node = current_node.next
+        print "*"*50

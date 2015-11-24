@@ -2,43 +2,39 @@ from Listas import *
 
 class MataCerebros(object):
 
-	def __init__(self, cintaSize = 15):
+	def __init__(self, cintaSize = 30000):
 		#Here we need to implement ListeDouble (cf. Listas.py)
-		self.cintaList = ListaDoble()
+		cintaList = ListaDoble()
 		for i in xrange(1,cintaSize):
-			self.cintaList.append(0)
-		self.currentCelda = self.cintaList.head
+			cintaList.append(0)
+		self.currentCelda = 0
 		self.actionDict = {"+": self.add, "-": self.remove, ">": self.up, "<": self.down, ".": self.printascii };
 
+	
 
 	def add(self):
-		if self.currentCelda: 
-			self.currentCelda.dato +=1
-			return self.currentCelda.dato
+		self.celda[self.currentCelda] += 1
+		return self.celda[self.currentCelda]
 
 	def remove(self):
-		if self.currentCelda: 
-			self.currentCelda.dato -=1
-			return self.currentCelda.dato
+		self.celda[self.currentCelda] -= 1
 
 	def up(self):
-		self.currentCelda=self.currentCelda.prox
+		self.currentCelda += 1
 		return self.currentCelda
-
 	def down(self):
-		self.currentCelda=self.currentCelda.prev
+		self.currentCelda -= 1
 		return self.currentCelda
 
 	def printascii(self):
 		#print chr(self.celda[self.currentCelda])
-		print self.currentCelda.dato
+		print self.celda[self.currentCelda]
 
 	def command(self,action):
 		self.actionDict[action]()
 
 	def __str__(self):
-		self.cintaList.show()
-		return ""
+		return str(self.celda)
 
 	def process_action(self,colas, firstCelda = 0):
 		#print self
