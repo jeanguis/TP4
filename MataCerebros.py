@@ -1,4 +1,4 @@
-import Listas
+from Listas import *
 
 class MataCerebros(object):
 
@@ -22,7 +22,8 @@ class MataCerebros(object):
 		return self.currentCelda
 
 	def printascii(self):
-		print chr(self.celda[self.currentCelda])
+		#print chr(self.celda[self.currentCelda])
+		print self.celda[self.currentCelda]
 
 	def command(self,action):
 		self.actionDict[action]()
@@ -30,21 +31,21 @@ class MataCerebros(object):
 	def __str__(self):
 		return str(self.celda)
 
-	def process_action(self,colas):
+	def process_action(self,colas, firstCelda = 0):
 		#print self
 		while not colas.es_vacia():
 			action=colas.desencolar()
-			print action
+			#print action
 			if type(action) is str:
 				self.command(action)
 			else:
-				L=[]
-				T=Cola()
-				while not action.es_vacia():
-					L.append(action.desencolar());
-					
-					for i in xrange(1,2):
-						for l in L:
-							T.encolar(l)
-						
-					self.process_action(T)	
+				cicleCelda = self.currentCelda
+				cicleCola = action
+				while not self.celda[0] == 0:
+					newCola = Cola()
+					while not cicleCola.es_vacia():
+						cAction = cicleCola.desencolar()
+						newCola.encolar(cAction)
+						self.command(cAction)
+					cicleCelda = newCola
+

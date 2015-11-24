@@ -26,7 +26,7 @@ def process_file(file):
 					currentColas = Cola()
 				elif char == "]":
 					struct.desapilar()
-					program.encolar(currentColas)
+					programBuffer.encolar(currentColas)
 					currentColas = programBuffer
 				else:
 					currentColas.encolar(char)
