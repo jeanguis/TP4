@@ -2,7 +2,7 @@ import argparse
 from Listas import *
 from MataCerebros import MataCerebros
 
-
+#We will put those in Class Matacerebros after, here for tests.
 def file_open(file):
 	try:
 		file = open(file)
@@ -15,6 +15,7 @@ programBuffer = Cola()
 command = ["<", ">", "+", "-", ".","[","]"]
 struct = Pila()
 
+#We will put those in Class Matacerebros after, here for tests.
 def process_file(file):
 	currentColas = programBuffer
 

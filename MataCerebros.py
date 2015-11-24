@@ -3,6 +3,7 @@ from Listas import *
 class MataCerebros(object):
 
 	def __init__(self):
+		#Here we need to implement ListeDouble (cf. Listas.py)
 		self.celda = [0 for i in xrange(1,20)]
 		self.currentCelda = 0
 		self.actionDict = {"+": self.add, "-": self.remove, ">": self.up, "<": self.down, ".": self.printascii };
@@ -37,8 +38,10 @@ class MataCerebros(object):
 			action=colas.desencolar()
 			#print action
 			if type(action) is str:
+				#WORK GREAT
 				self.command(action)
 			else:
+				#PART OF THE PROBLEM
 				cicleCelda = self.currentCelda
 				cicleCola = action
 				while not self.celda[0] == 0:
