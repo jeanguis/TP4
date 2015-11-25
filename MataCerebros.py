@@ -2,8 +2,7 @@ from Listas import *
 
 class MataCerebros(object):
 
-	def __init__(self, cintaSize = 15):
-		#Here we need to implement ListeDouble (cf. Listas.py)
+	def __init__(self, cintaSize = 300000):
 		self.cintaList = ListaDoble()
 		for i in xrange(1,cintaSize):
 			self.cintaList.append(0)
@@ -30,33 +29,32 @@ class MataCerebros(object):
 		return self.currentCelda
 
 	def printascii(self):
-		#print chr(self.celda[self.currentCelda])
+		#print chr(self.currentCelda.dato)
 		print self.currentCelda.dato
 
 	def command(self,action):
-		self.actionDict[action]()
+		if action in self.actionDict: 
+			self.actionDict[action]()
 
 	def __str__(self):
 		self.cintaList.show()
 		return ""
 
-	def process_action(self,colas, firstCelda = 0):
-		#print self
+	def process_action(self,colas, firstCelda =0):
 		while not colas.es_vacia():
+			#raw_input()
 			action=colas.desencolar()
-			#print action
+			print "ACTION:",action
 			if type(action) is str:
-				#WORK GREAT
 				self.command(action)
 			else:
-				#PART OF THE PROBLEM
 				cicleCelda = self.currentCelda
 				cicleCola = action
-				while not self.celda[0] == 0:
+				while not cicleCelda.dato == 0:
 					newCola = Cola()
 					while not cicleCola.es_vacia():
-						cAction = cicleCola.desencolar()
-						newCola.encolar(cAction)
-						self.command(cAction)
-					cicleCelda = newCola
+						newAction = cicleCola.desencolar()
+						self.command(newAction)
+						newCola.encolar(newAction)
+					cicleCola=newCola
 
