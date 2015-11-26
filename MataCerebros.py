@@ -6,7 +6,7 @@ class MataCerebros(object):
 		self.cintaList = ListaDoble()
 		for i in xrange(1,cintaSize):
 			self.cintaList.append(0)
-		self.currentCelda = self.cintaList.head.prox.prox
+		self.currentCelda = self.cintaList.head
 		self.actionDict = {"+": self.add, "-": self.remove, ">": self.up, "<": self.down, ".": self.printascii };
 
 
@@ -63,7 +63,7 @@ class MataCerebros(object):
 				#cicleCola = Cola()
 				#while not action.es_vacia():
 				#	cicleCola.encolar(action.desencolar())
-				cicleCola = action
+				cicleCola=action
 				while not cicleCelda.dato == 0:
 					newCola = Cola()
 					while not cicleCola.es_vacia():
@@ -71,4 +71,5 @@ class MataCerebros(object):
 						self.command(newAction)
 						newCola.encolar(newAction)
 					cicleCola=newCola
+					cicleCelda=self.currentCelda
 
